@@ -1,4 +1,4 @@
-package org.tec.datastructures.Listas;
+package org.tec.datastructures.listas;
 /**
  * Corresponde a las posiciones de los valores en las listas
  * @author Dario

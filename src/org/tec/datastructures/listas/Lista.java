@@ -1,4 +1,4 @@
-package org.tec.datastructures.Listas;
+package org.tec.datastructures.listas;
 /**
  * Polimorfismo para listas
  * @author Dario

@@ -1,54 +1,45 @@
-package org.tec.datastructures.Listas;
+package org.tec.datastructures.listas;
 /**
- * Estructura de listaDoblemente enlazada
+ * Estructura de lista Simple
  * @author Dario
  *
- * @param <T> tipo de valor que tendra la lista
+ * @param <T>Tipo de datos que almacenara
  */
-public class ListaDoble<T> implements Lista<T>{
+public class ListaSimple<T> implements Lista<T> {
 		Nodo<T> head;
-		Nodo<T> tail;
-		public ListaDoble() {
+		public ListaSimple() {
 			this.head=null;
-			this.tail=null;
 		}
 		@Override
 		public void add(T json) {
 			Nodo<T> nodo=new Nodo<>();
 			nodo.setValor(json);
-			if(this.head==null){
+			if(head==null){
 				this.head=nodo;
-				this.tail=this.head;
-			}
-			else if(this.head.next==null) {
-				this.head.next=nodo;
-				this.tail=nodo;
-				nodo.prev=this.head;
 			}
 			else {
-				Nodo<T> temp=tail;
-				this.tail.next=nodo;
-				this.tail=nodo;
-				this.tail.prev=temp;
+				Nodo<T> temp=this.head;
+				while(temp.next!=null) {
+					temp=temp.next;
+			}
+				temp.next=nodo;
 			}
 		}
 		@Override
 		public void delete(T valor) {
 			Nodo<T> nodo=this.head;
-			if(this.head.getValor()==valor) {
-				this.head=head.next;
+			if(head.getValor()==valor) {
+				head=head.next;
 			}
-			else if(tail.getValor()==valor) {
-				this.tail=tail.prev;
-				this.tail.next=null;
-			} 
 			else {
-				while(nodo.getValor()!=valor) {
+				while( nodo.next!=null) {
+					Nodo<T>temp=nodo.next;
+					if(nodo.next.getValor()==valor) {
+						nodo.next=temp.next;
+						break;
+					}
 					nodo=nodo.next;
 				}
-				Nodo<T> temp=nodo.next;
-				temp.prev=nodo.prev;
-				nodo.prev.next=temp;
 			}
 		}
 		@Override
@@ -76,17 +67,16 @@ public class ListaDoble<T> implements Lista<T>{
 		}
 		@Override
 		public Nodo<T> getHead() {
-			// TODO Auto-generated method stub
 			return this.head;
 		}
 		@Override
 		public Nodo<T> getTail() {
 			// TODO Auto-generated method stub
-			return this.tail;
+			return null;
 		}
 		@Override
 		public void setLista(Lista<T> lista) {
 			this.head=lista.getHead();
-			this.tail=lista.getTail();
-		}
+		}	
+		
 	}

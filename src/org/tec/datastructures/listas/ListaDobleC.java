@@ -1,4 +1,4 @@
-package org.tec.datastructures.Listas;
+package org.tec.datastructures.listas;
 /**
  * Estructura de lista Circular Doblemente enlazada
  * @author Dario

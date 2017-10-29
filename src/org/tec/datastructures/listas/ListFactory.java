@@ -1,4 +1,4 @@
-package org.tec.datastructures.Listas;
+package org.tec.datastructures.listas;
 /**
  * Hace una lista segun el tipo que se le indique
  * @author Dario
