@@ -66,6 +66,7 @@ public class ArbolBinario {
 			return eliminar(element, this.root);
 		}
 	}
+	
 	private Nodo eliminar(int element, Nodo u) {
 		if(u == null) {
 			return u; 
