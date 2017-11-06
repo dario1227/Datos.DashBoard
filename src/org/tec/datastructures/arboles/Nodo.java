@@ -9,6 +9,7 @@ public class Nodo {
 		this.left = null;
 		this.right = null;
 	}
+	
 	public Nodo(int element, Nodo right, Nodo left) {
 		this.element = element;
 		this.right = right;
