@@ -26,6 +26,7 @@ public class ArbolBinario {
 		}
 		}
 	
+	@SuppressWarnings("null")
 	public int findmin() {
 		if(this.root == null) {
 			return (Integer) null;
@@ -34,6 +35,7 @@ public class ArbolBinario {
 		}
 	
 	}
+	@SuppressWarnings("null")
 	private int findMin(Nodo current1) {
 		if(current1 == null) {
 			return (Integer) null;
