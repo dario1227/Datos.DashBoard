@@ -1,7 +1,7 @@
 package org.tec.datastructures.arboles;
 
 public class ArbolBinario {
-	private Nodo root;
+private Nodo root;
 	
 	public ArbolBinario() {
 		this.root = null;
@@ -86,4 +86,18 @@ public class ArbolBinario {
 		return u;
 	}
 	
+	//Prueba
+	public static void main(String[] args) {
+		ArbolBinario q = new ArbolBinario();
+		q.insertar(4);
+		q.insertar(2);
+		q.insertar(5);
+		q.eliminar(5);
+		q.insertar(8);
+		q.insertar(0);
+		q.insertar(1);
+		q.eliminar(0);
+		System.out.println(q.contiene(5));
+		System.out.println(q.findmin());
+	}
 	}
