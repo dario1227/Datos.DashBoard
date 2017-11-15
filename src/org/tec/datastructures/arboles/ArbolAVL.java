@@ -1,22 +1,22 @@
 package org.tec.datastructures.arboles;
 
-public class ArbolAVL {
-	private NodoAVL root;
-	 
-    public int Height(NodoAVL N) {
-        if (N == null)
+public class ArbolAVL<T> {
+	private NodoAVL<T> root=null;
+	
+    public int Height(NodoAVL<T> left) {
+        if (left == null)
             return 0;
  
-        return N.height;
+        return left.height;
     }
  
     public int Max(int a, int b) {
         return (a > b) ? a : b;
     }
  
-    public NodoAVL rightRotate(NodoAVL y) {
-        NodoAVL x = y.left;
-        NodoAVL T2 = x.right;
+    public NodoAVL<T> rightRotate(NodoAVL<T> y) {
+        NodoAVL<T> x = y.left;
+        NodoAVL<T> T2 = x.right;
  
         x.right = y;
         y.left = T2;
@@ -27,20 +27,21 @@ public class ArbolAVL {
         return x;
     }
  
-    public NodoAVL leftRotate(NodoAVL x) {
-        NodoAVL y = x.right;
-        NodoAVL T2 = y.left;
+    @SuppressWarnings("unchecked")
+	public NodoAVL<Integer> leftRotate(NodoAVL<Integer> left) {
+        NodoAVL<Integer> y = left.right;
+        NodoAVL<Integer> T2 = y.left;
  
-        y.left = x;
-        x.right = T2;
+        y.left = left;
+        left.right = T2;
  
-        x.height = Max(Height(x.left), Height(x.right)) + 1;
-        y.height = Max(Height(y.left), Height(y.right)) + 1;
+        left.height = Max(Height((NodoAVL<T>) left.left), Height((NodoAVL<T>) left.right)) + 1;
+        y.height = Max(Height((NodoAVL<T>) y.left), Height((NodoAVL<T>) y.right)) + 1;
  
         return y;
     }
  
-    public int getBalance(NodoAVL N) {
+    public int getBalance(NodoAVL<T> N) {
         if (N == null) {
             return 0;
         }else {
@@ -48,9 +49,10 @@ public class ArbolAVL {
         }
     }
  
-  public NodoAVL insertar(int element, NodoAVL current) {
+  @SuppressWarnings("unchecked")
+public NodoAVL<Integer> insertar(Integer element, NodoAVL<Integer> current) {
 	  if(current == null) {
-			return new NodoAVL(element);
+			return new NodoAVL<Integer>(element);
 		}
 		if(element < current.element) {
 			current.left= this.insertar(element, current.left);
@@ -60,12 +62,12 @@ public class ArbolAVL {
 			return current;
 		}
         
-        current.height = 1 + Max(Height(current.left), Height(current.right));
+        current.height = 1 + Max(Height((NodoAVL<T>) current.left), Height((NodoAVL<T>) current.right));
  
-        int balance = getBalance(current);
+        int balance = getBalance((NodoAVL<T>) current);
  
         if (balance > 1 && element < current.left.element)  {
-            return rightRotate(current);
+            return (NodoAVL<Integer>) rightRotate((NodoAVL<T>) current);
         }
         
         if (balance < -1 && element > current.right.element) {
@@ -74,47 +76,23 @@ public class ArbolAVL {
  
         if (balance > 1 && element > current.left.element) {
             current.left = leftRotate(current.left);
-            return rightRotate(current);
+            return (NodoAVL<Integer>) rightRotate((NodoAVL<T>) current);
         }
  
         if (balance < -1 && element < current.right.element) {
-            current.right = rightRotate(current.right);
+            current.right = (NodoAVL<Integer>) rightRotate((NodoAVL<T>) current.right);
             return leftRotate(current);
         }
  
         return current;
     }
  
-    public void preOrder(NodoAVL node) {
+    public void preOrder(NodoAVL<T> node) {
         if(node != null) {
             System.out.print(node.element + " ");
             preOrder(node.left);
             preOrder(node.right);
-        }
+       } 
        
-        
-    }
-    public void ImprimirAltura(NodoAVL node) {
-    	if(node != null) {
-            System.out.print(node.height + " "+ " ");
-            ImprimirAltura(node.left);
-            ImprimirAltura(node.right);
-        }
-       
-    }
-    //Prueba
-    public static void main(String[] args) {
-        ArbolAVL arbol = new ArbolAVL();
- 
-        arbol.root = arbol.insertar(47, arbol.root);
-        arbol.root = arbol.insertar(14, arbol.root);
-        arbol.root = arbol.insertar(95, arbol.root);
-        arbol.root = arbol.insertar(43, arbol.root);
-        arbol.root = arbol.insertar(98, arbol.root);
-        arbol.root = arbol.insertar(5, arbol.root);
- 
-        arbol.preOrder(arbol.root);
-        System.out.println("");
-        arbol.ImprimirAltura(arbol.root);
     }
 }

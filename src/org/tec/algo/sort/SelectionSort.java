@@ -1,7 +1,7 @@
 package org.tec.algo.sort;
 
 public class SelectionSort {
-	public void Acomodo(int arr[])
+	public static void Acomodo(int[] arr)
     {
         int n = arr.length;
  

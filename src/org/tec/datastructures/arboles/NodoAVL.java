@@ -1,12 +1,12 @@
 package org.tec.datastructures.arboles;
 
-public class NodoAVL { 
-	int element; 
+public class NodoAVL<T> { 
+	T element; 
 	int height;
-    NodoAVL left;
-    NodoAVL right;
+    NodoAVL<T> left;
+    NodoAVL<T> right;
  
-    public NodoAVL(int d) {
+    public NodoAVL(T d) {
         element = d;
         height = 1;
     }

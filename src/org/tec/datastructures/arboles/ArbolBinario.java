@@ -1,17 +1,18 @@
 package org.tec.datastructures.arboles;
 
-public class ArbolBinario {
-private Nodo root;
+public class ArbolBinario<T> {
+private Nodo<T> root;
 	
 	public ArbolBinario() {
 		this.root = null;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean contiene(int element) {
-		return this.contiene(element, root);
+		return this.contiene(element, (Nodo<Integer>) root);
 	}
 	
-	private boolean contiene(int element, Nodo current) {
+	private boolean contiene(int element, Nodo<Integer> current) {
 		if(current == null) {
 			return false;
 		}else{
@@ -26,32 +27,33 @@ private Nodo root;
 		}
 		}
 	
-	@SuppressWarnings("null")
+	@SuppressWarnings({ "null", "unchecked" })
 	public int findmin() {
 		if(this.root == null) {
 			return (Integer) null;
 		}else {
-			return findMin(this.root);
+			return findMin((Nodo<Integer>) this.root);
 		}
 	
 	}
 	@SuppressWarnings("null")
-	private int findMin(Nodo current1) {
+	private int findMin(Nodo<Integer> current1) {
 		if(current1 == null) {
 			return (Integer) null;
 		}else if(current1.left == null) {
-			return current1.element;
+			return (int) current1.element;
 		}else {
 			return findMin(current1.left);
 			}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void insertar(int element) {
-		this.root = this.insertar(element, this.root);
+		this.root = (Nodo<T>) this.insertar(element, (Nodo<Integer>) this.root);
 	}
-	private Nodo insertar(int element, Nodo current) {
+	private Nodo<Integer> insertar(int element, Nodo<Integer> current) {
 		if(current == null) {
-			return new Nodo(element);
+			return new Nodo<>(element);
 		}
 		if(element < current.element) {
 			current.left= this.insertar(element, current.left);
@@ -61,15 +63,16 @@ private Nodo root;
 		return current;
 		}
 	
-	public Nodo eliminar(int element) {
+	@SuppressWarnings("unchecked")
+	public Nodo<Integer> eliminar(int element) {
 		if(this.root == null) {
 			return null;
 		}else {
-			return eliminar(element, this.root);
+			return eliminar(element, (Nodo<Integer>)this.root);
 		}
 	}
 	
-	private Nodo eliminar(int element, Nodo u) {
+	private Nodo<Integer> eliminar(int element, Nodo<Integer> u) {
 		if(u == null) {
 			return u; 
 		}
@@ -86,18 +89,4 @@ private Nodo root;
 		return u;
 	}
 	
-	//Prueba
-	public static void main(String[] args) {
-		ArbolBinario q = new ArbolBinario();
-		q.insertar(4);
-		q.insertar(2);
-		q.insertar(5);
-		q.eliminar(5);
-		q.insertar(8);
-		q.insertar(0);
-		q.insertar(1);
-		q.eliminar(0);
-		System.out.println(q.contiene(5));
-		System.out.println(q.findmin());
-	}
 	}

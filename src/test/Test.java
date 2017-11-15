@@ -4,14 +4,15 @@ import org.tec.algo.search.BusquedaInterpolacion;
 import org.tec.algo.sort.BubbleSort;
 import org.tec.algo.sort.MergeSort;
 import org.tec.algo.sort.QuickSort;
+import org.tec.datastructures.arboles.ArbolBinario;
 
 public class Test {
 
 	public static void main(String[] args) {
-		int[]arr= {1,5,3,8,5,2,6};
-		BusquedaInterpolacion.start(arr,3);
-		print(arr);
-		System.out.println("\n"+suma(123457));
+		ArbolBinario<Integer>ar= new ArbolBinario<>();
+		ar.insertar(2);
+		ar.insertar(32);
+		ar.contiene(2);
 	}
 	public static void print(int[]arr) {
 		for(int x:arr) {
