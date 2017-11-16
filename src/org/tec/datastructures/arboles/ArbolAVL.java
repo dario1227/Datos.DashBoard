@@ -86,8 +86,86 @@ public NodoAVL<Integer> insertar(Integer element, NodoAVL<Integer> current) {
  
         return current;
     }
- 
-    public void preOrder(NodoAVL<T> node) {
+  public NodoAVL<T> min(NodoAVL<T> node)
+  {
+      NodoAVL<T> current = node;
+
+      while (current.left != null)
+         current = current.left;
+
+      return current;
+  }
+
+  @SuppressWarnings("unchecked")
+public NodoAVL<Integer> eliminar(int elemento, NodoAVL<Integer> current)
+  {
+      if (current == null) {
+          return current;
+      }
+      if (elemento < current.element) {
+          current.left = eliminar(elemento, current.left);
+          
+      }else if (elemento > current.element) {
+          current.right = eliminar(elemento, current.right);
+      
+      }else {
+          
+    	  if ((current.left == null) || (current.right == null))
+          {
+              NodoAVL<T> temp = null;
+              if (temp == current.left) {
+                  temp = (NodoAVL<T>)current.right;
+              }else {
+                  temp = (NodoAVL<T>)current.left;
+              }
+              
+              if (temp == null)
+              {
+                  temp = (NodoAVL<T>) current;
+                  current = null;
+              } else {
+            	  current = (NodoAVL<Integer>) temp; 
+            	  }
+                  
+          } else {
+              NodoAVL<T> temp = min((NodoAVL<T>) current.right);
+
+              current.element = (Integer) temp.element;
+
+              current.right = eliminar((int) temp.element, current.right);
+          }
+      }
+
+      if (current == null) {
+          return current;
+      }
+      
+      current.height = Max(Height((NodoAVL<T>) current.left), Height((NodoAVL<T>) current.right)) + 1;
+
+      int balance = getBalance((NodoAVL<T>) current);
+
+      if (balance > 1 && getBalance((NodoAVL<T>) current.left) >= 0) {
+          return (NodoAVL<Integer>) rightRotate((NodoAVL<T>) current);
+      }
+      if (balance > 1 && getBalance((NodoAVL<T>) current.left) < 0) {
+          current.left = leftRotate(current.left);
+          return (NodoAVL<Integer>) rightRotate((NodoAVL<T>) current);
+      }
+
+      if (balance < -1 && getBalance((NodoAVL<T>) current.right) <= 0) {
+          return leftRotate(current);
+      }
+      
+      if (balance < -1 && getBalance((NodoAVL<T>) current.right) > 0) {
+          current.right = (NodoAVL<Integer>) rightRotate((NodoAVL<T>) current.right);
+          return leftRotate(current);
+      }
+
+      return current;
+  }
+
+  
+  public void preOrder(NodoAVL<T> node) {
         if(node != null) {
             System.out.print(node.element + " ");
             preOrder(node.left);
@@ -95,4 +173,5 @@ public NodoAVL<Integer> insertar(Integer element, NodoAVL<Integer> current) {
        } 
        
     }
+ 
 }
